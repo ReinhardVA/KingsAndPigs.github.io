@@ -9,3 +9,4 @@ class CollisionBlock {
         c.fillRect(this.position.x, this.position.y, this.width, this.height);
     }
 }
+//Her 292 sembollü bloğu ayrı bir nesne haline getiririz ve çarpışmalar için gerekli bir büyük alan elde ederiz.

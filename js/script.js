@@ -3,10 +3,20 @@ const canvas = document.querySelector('canvas');
 const c = canvas.getContext('2d');
 canvas.width = 1024;
 canvas.height = 576;
+//Üstteki kodda sahnenin olduğu kanvas tanımlandı
+
 const velocityHorizontal = 5;
+//Karakterin sağa ve sola ne kadar hızlı gideceğini tanımladık
+
 const frameBuffer = 4;
+//Assetlerin okunması için yapılmış kodlarda framebuffer sayesinde biraz daha yavaş çalışmasını sağlıyoruz, bu sayede
+//daha oturaklı animasyonlar elde ediyoruz. Fazla tutarsak görüntü kasan bir hale gelir, az tutarsak animasyon çok hızlı gerçekleşir
+
 const parsedCollisions = collisionsLevel1.parse2D();
+//Haritayı bloklar halinde bölüyoruz. Her blokta çarpışma yaşanıp karakterin hareketlerini kısıtlaması ve gerçekçilik hissiyatı
+//vermesi açısından önemli.
 const collisionBlocks = [];
+//Bölünen her bloğu bu dizide tutuyoruz.
 
 const bgLevel1 = new Sprite({
     position:{
@@ -15,6 +25,8 @@ const bgLevel1 = new Sprite({
     },
     imageSrc: './img/backgroundLevel1.png'
 });
+//Harita için bir obje oluşturup bu objeden aynı dosyadaki harita görselini okuyoruz
+
 const player = new Player({
     collisionBlocks: collisionBlocks,
     imageSrc: './img/king/idle.png',
@@ -61,6 +73,9 @@ const player = new Player({
         }
     }
 });
+// Gene aynı şekilde karakter için bir sınıf oluşturduk bu karakterin görselleri için, mekanikleri için vs. yazılan kodları
+// bu sınıfta tutuyoruz
+
 
 const doors = [
     new Sprite({
@@ -75,7 +90,8 @@ const doors = [
         autoplay: false
     })
 ];
-
+// Kapı dizisinden bir sprite objesi oluşturuyoruz. Bu obje sayesinde kağının görselini oyuna yansıtabiliriz ve animasyonları
+// kullanabiliriz
 const keys = {
     w:{
         pressed: false,
@@ -90,9 +106,10 @@ const keys = {
         pressed: false
     }
 }
+//Tuş atamaları.
 Animate();
 CreateCollisionBlocks();
-
+//Çağrılan fonksiyonlar
 
 //functions
 
@@ -112,7 +129,8 @@ function Animate(){
     player.Update(canvas.height, canvas.width);
     window.requestAnimationFrame(Animate);
 }
-
+//Animate oyunun bel kemiği. Sondaki fonksiyon sayesinde her framede sürekli kendini çağırıyor bu sayede
+//oyunumuzu oynayabilir hale geliyoruz
 function MoveHorizontal() {
     if (player.preventInput) return;
     player.velocity.x = 0;
@@ -135,7 +153,8 @@ function MoveHorizontal() {
 
     }
 }
-
+//Yatayda hareketlerimiz için kullanılan ve bu hareketlerdeki animasyonları çağıran fonksiyonumuz. İlgili tuşları
+//basıldığında true, çekildiğinde false olarak tanımladığımızdan bas çek halinde çalışıyor ve sürekli çağrılıyor.
 function CreateCollisionBlocks() {
     parsedCollisions.forEach((row, y) => {
         row.forEach((symbol, x) => {
@@ -150,3 +169,4 @@ function CreateCollisionBlocks() {
         })
     });
 }
+//Haritayı böldüğümüz blokları bir diziye atıyoruz. Bu Sayede haritamız aslında çizimden ziyade bir gerçekçilik katıyor.

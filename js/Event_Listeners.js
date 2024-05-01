@@ -44,3 +44,4 @@ window.addEventListener('keyup', (event) => {
             break;
     }
 });
+//Tuş atamaları için gerekli eventleri çağırdığımız yer. Yukarıdaki bastığımızda true'ya döndürerek hareketi sağlar, aşağısı bıraktığımızda hareketi sonlandırır
