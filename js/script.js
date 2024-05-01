@@ -48,13 +48,16 @@ const player = new Player({
             frameRate: 8,
             frameBuffer: frameBuffer,
             loop: false,
-            imageSrc: './img/king/enterDoor.png'
+            imageSrc: './img/king/enterDoor.png',
+            onComplete: () => {
+                player.SwitchSprite('idle')
+            }
         },
         attack:{
             frameRate: 3,
             frameBuffer: 3,
             loop: false,
-            imageSrc: './img/king/attack.png'
+            imageSrc: './img/king/Attack2.png'
         }
     }
 });

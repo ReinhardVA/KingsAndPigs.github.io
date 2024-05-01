@@ -5,7 +5,7 @@ class CollisionBlock {
         this.height = 64;
     }
     Draw() {
-        c.fillStyle = 'rgba(255, 0, 0, 0.5)';
+        c.fillStyle = 'transparent';
         c.fillRect(this.position.x, this.position.y, this.width, this.height);
     }
 }
